@@ -14,8 +14,15 @@ class App extends Component {
     };
   }
 
-  componentWillMount() {
-
+  componentDidMount() {
+    axios.get('http://localhost:3001/api/contacts')
+      .then(resp => {
+        this.setState({
+          searchText: this.state.searchText,
+          contacts: resp.data
+        })
+      })
+      .catch(err => console.log(`Error! ${err}`));
   }
 
   handleSearchBarChange(event) {
